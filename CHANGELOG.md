@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3 (2018-11-05)
+
+### Fixed
+- Fixed modal window contents, so they don't animate (fade up) anymore, regardless of site settings
+
 ## 0.2 (2018-11-05)
 
 ### Fixed

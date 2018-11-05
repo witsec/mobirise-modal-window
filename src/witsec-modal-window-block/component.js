@@ -61,8 +61,8 @@ mbrApp.loadComponents(
 					// Header
 					if (p.modalHeader) {
 						m += '<div class="modal-header">';
-						m += '  <h5 class="modal-title" id="' + p.modalName + 'Label">' + p.modalTitle + '</h5>';
-						m += '  <a href="#" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>';
+						m += '  <h5 class="no-anim modal-title" id="' + p.modalName + 'Label">' + p.modalTitle + '</h5>';
+						m += '  <a href="#" class="no-anim close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>';
 						m += '</div>';
 					}
 
@@ -75,12 +75,12 @@ mbrApp.loadComponents(
 
 						// Close Btn
 						if (p.modalCloseBtn) {
-							m += '<div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-dismiss="modal">' + p.modalCloseText + '</a></div>';
+							m += '<div class="mbr-section-btn"><a href="#" class="no-anim btn btn-secondary display-4" data-dismiss="modal">' + p.modalCloseText + '</a></div>';
 						}
 
 						// Link
 						if (p.modalLink) {
-							m += '<div class="mbr-section-btn"><a href="' + p.modalLinkUrl + '" class="btn btn-primary display-4" ' + (p.modalLinkNewWindow ? "target=_new" : "") + '>' + p.modalLinkText + '</a></div>';
+							m += '<div class="mbr-section-btn"><a href="' + p.modalLinkUrl + '" class="no-anim btn btn-primary display-4" ' + (p.modalLinkNewWindow ? "target=_new" : "") + '>' + p.modalLinkText + '</a></div>';
 						}
 
 						m += '</div>';
