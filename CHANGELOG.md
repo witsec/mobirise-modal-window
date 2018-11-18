@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 1.1 (2018-11-18)
 - Added 'Open Automatically' to automatically open a modal window when you visit a page, with or without a delay, with or without setting a cookie
+- Added feature to replace modal body (with itself...) after closing said modal, to stop active content (like videos) from continuing playback
 
 ## 1.0 (2018-11-12)
 - Added 'Enable HTML' switch in params menu. When enabled, the user can enter all the HTML (s)he likes. When disabled, breaklines (`\n`) get replaced with `<br />`. This option is turned off by default, so if HTML is used with a previous version, this switch has to be turned on in order for it to work properly
