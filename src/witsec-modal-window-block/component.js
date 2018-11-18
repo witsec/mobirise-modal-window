@@ -3,9 +3,6 @@ mbrApp.loadComponents(
 	{"witsec-modal-window-block":{
 			_group:"witsec",
 			_onParamsShow: function(e,$params,$block) {
-				// Replace all characters (except letters, numbers and dashes) to dashes, so modal names end up with proper names
-				this._params.modalName = this._params.modalName.replace(/([^a-z0-9\-]+)/img, '-');
-
 				// If we don't encode the textareas, it'll mess up the HTMLCode textarea in the gear box
 				// And we have to do this again in the _onParamsChange block as well
 				// The encoded textareas are automatically decoded, so the result is as it should be :)
@@ -14,7 +11,7 @@ mbrApp.loadComponents(
 			_params:{
 				modalNotice:         {type:"separator",title: "The block on the left will not be visible on preview/publish."},
 				modalName:           {type:"text",title:"Modal Name (must be unique)",default:""},
-				modalSize:           {type:"select",title:"Size",values:{small:"Small",medium:"Medium",large:"Large"},default:"medium"},
+				modalSize:           {type:"select",title:"Size",values:{small:"Small",medium:"Medium",large:"Large"},default:"medium",condition:["modalName"]},
 				modalHeader:         {type:"switch",title:"Header",default:!0,condition:["modalName"]},
 				modalTitle:          {type:"text",title:"Title",default:"Modal title",condition:["modalName", "modalHeader"]},
 				modalBody:           {type:"textarea",title:"Body",default:"Modal body text goes here.",condition:["modalName"]},
@@ -27,13 +24,20 @@ mbrApp.loadComponents(
 				modalLinkText:       {type:"text",title:"Link Text",default:"Visit Mobirise",condition:["modalName", "modalFooter", "modalLink"]},
 				modalLinkNewWindow:  {type:"switch",title:"Open in New Window",default:!0,condition:["modalName", "modalFooter", "modalLink"]},
 				modalVerticalCenter: {type:"switch",title:"Vertically Centered",default:!1,condition:["modalName"]},
-				modalFade:           {type:"switch",title:"Fade Effect",default:!0,condition:["modalName"]}
+				modalFade:           {type:"switch",title:"Fade Effect",default:!0,condition:["modalName"]},
+				modalAutoOpen:       {type:"switch",title:"Open Automatically",default:!1,condition:["modalName"]},
+				modalAutoOpenOnce:   {type:"switch",title:"Open Once",default:!0,condition:["modalName", "modalAutoOpen"]},
+				modalAutoOpenGDPR:   {type:"switch",title:"GDPR Compliant",default:!0,condition:["modalName", "modalAutoOpen", "modalAutoOpenOnce"]},
+				modalAutoOpenDelay:  {type:"range",title:"Auto Open Delay",min:0,max:10,step:1,default:0,condition:["modalName", "modalAutoOpen"]}
 			},
 			modalTest: "Please use the gear-icon to change the modal name.",
 			modalBody: "Modal body text goes here.",
 			_onParamsChange: function($item, param, val) {
 
 				if (param == "modalName") {
+					// Replace all characters (except letters, numbers and dashes) to dashes, so modal names end up with proper names
+					this._params.modalName = this._params.modalName.replace(/([^a-z0-9\-]+)/img, '-');
+
 					// Only allow letters, numbers and dashes
 					val = val.replace(/([^a-z0-9\-]+)/img, '-');
 
@@ -43,16 +47,28 @@ mbrApp.loadComponents(
 						this.modalWindow = "";
 					}
 					else {
-						// Buttons to preview modal and how-to-use window
-						this.modalTest  = '<div class="mbr-section-btn">';
-						this.modalTest += '<a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '">Preview ' + val + '</a>';
-						this.modalTest += '<a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '-howtouse">How to use ' + val + '</a>';
-						this.modalTest += '</div>';
-
-						// Modal window for how-to-use
-						this.modalTest += '<div class="modal fade" id="' + val + '-howtouse" tabindex="-1" role="dialog" aria-labelledby="' + val + '-howtouseLabel" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="' + val + '-howtouseLabel">How to use?</h5><a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a></div>';
-						this.modalTest += '<div class="modal-body">Using your new modal is very easy. Simply create a new link, then click the "..." tab and enter the following as custom URL:<br /><br /><code>javascript:OpenModal(\'' + val + '\')</code></div>';
-						this.modalTest += '<div class="modal-footer"><div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-dismiss="modal">Close</a></div></div></div></div></div>';
+						// Buttons to PREVIEW modal and HOW-TO-USE
+						this.modalTest = [
+							'<div class="mbr-section-btn">',
+							'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '">Preview ' + val + '</a>',
+							'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '-howtouse">How to use ' + val + '</a>',
+							'</div>',
+							'<div class="modal fade" id="' + val + '-howtouse" tabindex="-1" role="dialog" aria-labelledby="' + val + '-howtouseLabel" aria-hidden="true"><div class="modal-dialog" role="document">',
+							'  <div class="modal-content">',
+							'    <div class="modal-header">',
+							'      <h5 class="modal-title" id="' + val + '-howtouseLabel">How to use?</h5>',
+							'      <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>',
+							'    </div>',
+							'    <div class="modal-body">',
+							'      Using your new modal is very easy. Simply create a new link, then click the "..." tab and enter the following as custom URL:<br /><br />',
+							'      <code>javascript:OpenModal(\'' + val + '\')</code>',
+							'    </div>',
+							'    <div class="modal-footer">',
+							'      <div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-dismiss="modal">Close</a></div>',
+							'    </div>',
+							'  </div>',
+							'</div>'
+						].join("\n");
 					}
 				}
 
@@ -76,6 +92,7 @@ mbrApp.loadComponents(
 						default:		var size = "";
 					}
 
+					// Let's create the modal
 					var m = "";
 					m += '<div class="modal ' + (p.modalFade ? "fade" : "") + '" id="' + p.modalName + '" tabindex="-1" role="dialog" aria-labelledby="' + p.modalName + 'Label" aria-hidden="true">';
 					m += '  <div class="modal-dialog ' + size + ' ' + (p.modalVerticalCenter ? "modal-dialog-centered" : "") + '" role="document">';
@@ -98,7 +115,7 @@ mbrApp.loadComponents(
 						// If HTML is disabled, replace any "<" with "&lt;" and replace \n with HTML breaklines
 						b = this.modalBody.replace(/</g, "&lt;").replace(/\n|\r/g, "<br />");
 					}
-					m += '<div class="modal-body">' + b + '</div>';
+					m += '<div class="modal-body" id="' + p.modalName + '_body">' + b + '</div>';
 
 					// Footer
 					if (p.modalFooter) {
@@ -120,12 +137,59 @@ mbrApp.loadComponents(
 					m += '    </div>';
 					m += '  </div>';
 					m += '</div>';
+
+					// Clear modal body when modal is closed, then refill right after (this kills playing YouTube instances for example)
+					m += '<script>',
+					m += 'document.addEventListener("DOMContentLoaded", function() {',
+					m += '  $("#' + p.modalName + '").on("hidden.bs.modal", function () {';
+					m += '    var html = $( "#' + p.modalName + '_body" ).html();';
+					m += '    $( "#' + p.modalName + '_body" ).empty();';
+					m += '    $( "#' + p.modalName + '_body" ).append(html);';
+					m += '  })';
+					m += '});',
+					m += '</script>';
+
+					// Alright, the modal is ready, showtime!
 					this.modalWindow = m;
 				}
 			},
 			_publishFilter: function($obj) {
+				// Remove the buttons, we don't need to publish them
 				$obj.find(".witsec-modal-window-test").remove();
 				$obj.find(".witsec-modal-window-body").remove();
+
+				// If the modal has to pop-up automatically, append some additional code to make that happen
+				if (this._params.modalAutoOpen) {
+					var n = this._params.modalName;
+
+					// If the modal should open only once, set a cookie (but only if another cookie is already present, because cookie laws... meh)
+					if (this._params.modalAutoOpenOnce) {
+						var m = [
+							'<script>',
+							'document.addEventListener("DOMContentLoaded", function() {',
+							'  if (modalGetCookie("' + n + '_viewed") == "") {',
+							'    setTimeout( function() {',
+							'      ' + (this._params.modalAutoOpenGDPR ? "if (document.cookie)" : ""),
+							'        modalSetCookie("' + n + '_viewed", true, 3600);',
+							'      OpenModal("' + n + '");',
+							'    } , ' + this._params.modalAutoOpenDelay * 1000 + ');',
+							'  }',
+							'});',
+							'</script>'
+						].join("\n");
+					} else {
+						var m = [
+							'<script>',
+							'document.addEventListener("DOMContentLoaded", function() {',
+							'  setTimeout( function() { OpenModal("' + n + '"); } , ' + this._params.modalAutoOpenDelay * 1000 + ');',
+							'});',
+							'</script>'
+						].join("\n");
+					}
+
+					// Append the code
+					$obj.append(m);
+				}
 			}	
 		}
 	}
