@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2 (2019-05-14)
+- Corrected a styling issue that was introduced in Mobirise 4.10.0, which caused a modal window to be full height.
+
 ## 1.1 (2018-11-18)
 - Added 'Open Automatically' to automatically open a modal window when you visit a page, with or without a delay, with or without setting a cookie
 - Added feature to replace modal body (with itself...) after closing said modal, to stop active content (like videos) from continuing playback

@@ -53,18 +53,20 @@ mbrApp.loadComponents(
 							'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '">Preview ' + val + '</a>',
 							'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '-howtouse">How to use ' + val + '</a>',
 							'</div>',
-							'<div class="modal fade" id="' + val + '-howtouse" tabindex="-1" role="dialog" aria-labelledby="' + val + '-howtouseLabel" aria-hidden="true"><div class="modal-dialog" role="document">',
-							'  <div class="modal-content">',
-							'    <div class="modal-header">',
-							'      <h5 class="modal-title" id="' + val + '-howtouseLabel">How to use?</h5>',
-							'      <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>',
-							'    </div>',
-							'    <div class="modal-body">',
-							'      Using your new modal is very easy. Simply create a new link, then click the "..." tab and enter the following as custom URL:<br /><br />',
-							'      <code>javascript:OpenModal(\'' + val + '\')</code>',
-							'    </div>',
-							'    <div class="modal-footer">',
-							'      <div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-dismiss="modal">Close</a></div>',
+							'<div class="modal fade" id="' + val + '-howtouse" tabindex="-1" role="dialog" aria-labelledby="' + val + '-howtouseLabel" aria-hidden="true">',
+							'  <div class="modal-dialog" role="document" style="height:auto">',
+							'    <div class="modal-content">',
+							'      <div class="modal-header">',
+							'        <h5 class="modal-title" id="' + val + '-howtouseLabel">How to use?</h5>',
+							'        <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>',
+							'      </div>',
+							'      <div class="modal-body">',
+							'        Using your new modal is very easy. Simply create a new link, then click the "..." tab and enter the following as custom URL:<br /><br />',
+							'        <code>javascript:OpenModal(\'' + val + '\')</code>',
+							'      </div>',
+							'      <div class="modal-footer">',
+							'        <div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-dismiss="modal">Close</a></div>',
+							'      </div>',
 							'    </div>',
 							'  </div>',
 							'</div>'
@@ -95,7 +97,7 @@ mbrApp.loadComponents(
 					// Let's create the modal
 					var m = "";
 					m += '<div class="modal ' + (p.modalFade ? "fade" : "") + '" id="' + p.modalName + '" tabindex="-1" role="dialog" aria-labelledby="' + p.modalName + 'Label" aria-hidden="true">';
-					m += '  <div class="modal-dialog ' + size + ' ' + (p.modalVerticalCenter ? "modal-dialog-centered" : "") + '" role="document">';
+					m += '  <div class="modal-dialog ' + size + ' ' + (p.modalVerticalCenter ? "modal-dialog-centered" : "") + '" style="height:auto" role="document">';
 					m += '    <div class="modal-content">';
 
 					// Header
