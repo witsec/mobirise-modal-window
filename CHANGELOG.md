@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2 (2020-03-14)
+
+- Fixed compatibility with Mobirise v5
+
 ## 1.2 (2019-05-14)
 - Corrected a styling issue that was introduced in Mobirise 4.10.0, which caused a modal window to be full height.
 
