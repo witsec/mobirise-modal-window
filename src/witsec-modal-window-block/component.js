@@ -51,22 +51,22 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 							// Buttons to PREVIEW modal and HOW-TO-USE
 							this.modalTest = [
 								'<div class="mbr-section-btn">',
-								'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '">Preview ' + val + '</a>',
-								'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '-howtouse">How to use ' + val + '</a>',
+								'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '" data-bs-toggle="modal" data-bs-target="#' + val + '">Preview ' + val + '</a>',
+								'  <a href="#" class="btn btn-primary display-4" data-toggle="modal" data-target="#' + val + '-howtouse" data-bs-toggle="modal" data-bs-target="#' + val + '-howtouse">How to use ' + val + '</a>',
 								'</div>',
 								'<div class="modal fade" id="' + val + '-howtouse" tabindex="-1" role="dialog" aria-labelledby="' + val + '-howtouseLabel" aria-hidden="true">',
 								'  <div class="modal-dialog" role="document" style="height:auto">',
 								'    <div class="modal-content">',
 								'      <div class="modal-header">',
 								'        <h5 class="modal-title" id="' + val + '-howtouseLabel">How to use?</h5>',
-								'        <a href="" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>',
+								'        <a href="" class="close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>',
 								'      </div>',
 								'      <div class="modal-body">',
 								'        Using your new modal is very easy. Simply create a new link, then click the "..." tab and enter the following as custom URL:<br /><br />',
 								'        <code>javascript:OpenModal(\'' + val + '\')</code>',
 								'      </div>',
 								'      <div class="modal-footer">',
-								'        <div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-dismiss="modal">Close</a></div>',
+								'        <div class="mbr-section-btn"><a href="#" class="btn btn-secondary display-4" data-bs-dismiss="modal" data-dismiss="modal">Close</a></div>',
 								'      </div>',
 								'    </div>',
 								'  </div>',
@@ -105,7 +105,7 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 						if (p.modalHeader) {
 							m += '<div class="modal-header">';
 							m += '  <h5 class="no-anim modal-title" id="' + p.modalName + 'Label">' + p.modalTitle + '</h5>';
-							m += '  <a href="#" class="no-anim close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>';
+							m += '  <a href="#" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>';
 							m += '</div>';
 						}
 
@@ -126,7 +126,7 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 
 							// Close Btn
 							if (p.modalCloseBtn) {
-								m += '<div class="mbr-section-btn"><a href="#" class="no-anim btn btn-secondary display-4" data-dismiss="modal">' + p.modalCloseText + '</a></div>';
+								m += '<div class="mbr-section-btn"><a href="#" class="no-anim btn btn-secondary display-4" data-bs-dismiss="modal" data-dismiss="modal">' + p.modalCloseText + '</a></div>';
 							}
 
 							// Link
@@ -142,14 +142,21 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 						m += '</div>';
 
 						// Clear modal body when modal is closed, then refill right after (this kills playing YouTube instances for example)
-						m += '<script>',
-						m += 'document.addEventListener("DOMContentLoaded", function() {',
-						m += '  $("#' + p.modalName + '").on("hidden.bs.modal", function () {';
-						m += '    var html = $( "#' + p.modalName + '_body" ).html();';
-						m += '    $( "#' + p.modalName + '_body" ).empty();';
-						m += '    $( "#' + p.modalName + '_body" ).append(html);';
-						m += '  })';
-						m += '});',
+						m += '<script> \n',
+						m += 'document.addEventListener("DOMContentLoaded", function() { \n',
+						m += '  if(typeof jQuery === "function") {\n';
+						m += '    $("#' + p.modalName + '").on("hidden.bs.modal", function () { \n';
+						m += '      var html = $( "#' + p.modalName + '_body" ).html(); \n';
+						m += '      $( "#' + p.modalName + '_body" ).empty(); \n';
+						m += '      $( "#' + p.modalName + '_body" ).append(html); \n';
+						m += '    }) \n';
+						m += '  } else { \n';
+						m += '      var mdw = document.getElementById("#' + p.modalName + '") \n';
+						m += '      mdw.addEventListener("hidden.bs.modal", function(event) { \n';
+						m += '        mdw.innerHTML = mdw.innerHTML; \n';
+						m += '      }); \n';
+						m += '  } \n';
+						m += '}); \n',
 						m += '</script>';
 
 						// Alright, the modal is ready, showtime!

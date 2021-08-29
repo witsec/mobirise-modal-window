@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v3 (2020-08-29)
+
+- Added compatibility with themes based on Bootstrap 5 (jQuery is no longer used there)
+
 ## v2 (2020-03-14)
 
 - Fixed compatibility with Mobirise v5
