@@ -58,10 +58,10 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 								'  <div class="modal-dialog" role="document" style="height:auto">',
 								'    <div class="modal-content">',
 								'      <div class="modal-header">',
-								'        <h5 class="modal-title" id="' + val + '-howtouseLabel">How to use?</h5>',
+								'        <h5 class="modal-title display-7" id="' + val + '-howtouseLabel">How to use?</h5>',
 								'        <a href="" class="close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>',
 								'      </div>',
-								'      <div class="modal-body">',
+								'      <div class="modal-body display-7">',
 								'        Using your new modal is very easy. Simply create a new link, then click the "..." tab and enter the following as custom URL:<br /><br />',
 								'        <code>javascript:OpenModal(\'' + val + '\')</code>',
 								'      </div>',
@@ -104,7 +104,7 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 						// Header
 						if (p.modalHeader) {
 							m += '<div class="modal-header">';
-							m += '  <h5 class="no-anim modal-title" id="' + p.modalName + 'Label">' + p.modalTitle + '</h5>';
+							m += '  <h5 class="no-anim modal-title display-7" id="' + p.modalName + 'Label">' + p.modalTitle + '</h5>';
 							m += '  <a href="#" class="no-anim close" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>';
 							m += '</div>';
 						}
@@ -118,7 +118,7 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 							// If HTML is disabled, replace any "<" with "&lt;" and replace \n with HTML breaklines
 							b = this.modalBody.replace(/</g, "&lt;").replace(/\n|\r/g, "<br />");
 						}
-						m += '<div class="modal-body" id="' + p.modalName + '_body">' + b + '</div>';
+						m += '<div class="modal-body display-7" id="' + p.modalName + '_body">' + b + '</div>';
 
 						// Footer
 						if (p.modalFooter) {

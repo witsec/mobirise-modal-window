@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v4 (2022-08-03)
+
+- Fixed text not using the correct font. Title and text in a modal window now use the 'text' font settings.
+
 ## v3 (2020-08-29)
 
 - Added compatibility with themes based on Bootstrap 5 (jQuery is no longer used there)

@@ -1,9 +1,11 @@
 {
-   "name" : "Modal Window v3",
+   "name" : "Modal Window v4",
    "alias" : "witsec-modal-window",
-   "version" : 2,
+   "version" : 4,
    "minAppVersion" : "4",
    "components" : [ "witsec-modal-window-block" ],
+   "ampCompatible": false,
    "description" : "Create your own modal windows and open them through links. <a href='https://witsec.nl'>Learn more...</a>",
-   "logo" : "thumbnail.svg"
+   "largeCover": "cover.jpg",
+   "logo" : "thumbnail.jpg"
 }
