@@ -1,4 +1,4 @@
-defineM("global-witsec-modal-window", function(g, mbrApp, tr) {
+defineM("witsec-modal-window", function(g, mbrApp, tr) {
 	mbrApp.loadComponents(
 		"witsec-modal-window",
 		{"global-witsec-modal-window-block":{
