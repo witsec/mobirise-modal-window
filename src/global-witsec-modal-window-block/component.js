@@ -1,7 +1,7 @@
-defineM("witsec-modal-window", function(g, mbrApp, tr) {
+defineM("global-witsec-modal-window", function(g, mbrApp, tr) {
 	mbrApp.loadComponents(
 		"witsec-modal-window",
-		{"witsec-modal-window-block":{
+		{"global-witsec-modal-window-block":{
 				_group:"witsec",
 				_onParamsShow: function(e,$params,$block) {
 					// If we don't encode the textareas, it'll mess up the HTMLCode textarea in the gear box
