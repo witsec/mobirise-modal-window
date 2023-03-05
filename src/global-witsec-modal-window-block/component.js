@@ -10,7 +10,7 @@ defineM("witsec-modal-window", function(g, mbrApp, tr) {
 					this._params.modalBody = this.modalBody.replace(/<\/textarea/gim, "&lt;/textarea");
 				},
 				_params:{
-					modalNotice:         {type:"separator",title: "[SINGLE PAGE MODAL] The block on the left will not be visible on preview/publish."},
+					modalNotice:         {type:"separator",title: "[GLOBAL MODAL] The block on the left will not be visible on preview/publish."},
 					modalName:           {type:"text",title:"Modal Name (must be unique)",default:""},
 					modalSize:           {type:"select",title:"Size",values:{small:"Small",medium:"Medium",large:"Large"},default:"medium",condition:["modalName"]},
 					modalHeader:         {type:"switch",title:"Header",default:!0,condition:["modalName"]},

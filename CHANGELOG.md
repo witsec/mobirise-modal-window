@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## v4.1 (2023-03-05)
+
+- Added global modal block option.
+
 ## v4 (2022-08-03)
 
 - Fixed text not using the correct font. Title and text in a modal window now use the 'text' font settings.

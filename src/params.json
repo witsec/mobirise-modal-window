@@ -1,9 +1,9 @@
 {
    "name" : "Modal Window v4",
    "alias" : "witsec-modal-window",
-   "version" : 4,
+   "version" : 4.1,
    "minAppVersion" : "4",
-   "components" : [ "witsec-modal-window-block" ],
+   "components" : [ "witsec-modal-window-block", "global-witsec-modal-window-block" ],
    "ampCompatible": false,
    "description" : "Create your own modal windows and open them through links. <a href='https://witsec.nl'>Learn more...</a>",
    "largeCover": "cover.jpg",
